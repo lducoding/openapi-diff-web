@@ -17,10 +17,9 @@ import java.util.*;
 public class DiffController {
 
     @GetMapping("/diff")
-    public String diff(Model model, String one, String two) {
-//        String OPENAPI_DOC1 = directory + "\\" + folderList.get(0);
-        String OPENAPI_DOC1 = one;
-        String OPENAPI_DOC2 = two;
+    public String diff(Model model, String openapi1, String openapi2) {
+        String OPENAPI_DOC1 = openapi1;
+        String OPENAPI_DOC2 = openapi2;
 
         ChangedOpenApi diff = OpenApiCompare.fromLocations(OPENAPI_DOC1, OPENAPI_DOC2);
 
@@ -28,8 +27,7 @@ public class DiffController {
                 "http://deepoove.com/swagger-diff/stylesheets/demo.css")
                 .render(diff);
 
-        System.out.println(html);
-        model.addAttribute("tt", html);
+        model.addAttribute("diffResult", html);
 
         // html 파일로 추출 (return to html file)
 //        try {
@@ -57,7 +55,6 @@ public class DiffController {
             apiFolder.put(folders.get(i),folderDir[i].toString());
         }
         model.addAttribute("apiFolder", apiFolder);
-        System.out.println(apiFolder);
 
         return "home";
     }

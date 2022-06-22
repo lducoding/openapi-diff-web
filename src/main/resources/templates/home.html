@@ -21,19 +21,19 @@
     }
     function setFileDir() {
         var openapi1Dir = $('#opeapi1 option:selected').val();
-        $('#one').val(openapi1Dir);
+        $('#openapi1').val(openapi1Dir);
     }
     function showSubmit() {
         var openap21Dir = $('#opeapi2 option:selected').val();
-        $('#two').val(openap21Dir);
+        $('#openapi2').val(openap21Dir);
         document.getElementsByClassName('submitBtn')[0].style.display = ''
     }
 </script>
 openapi 이전버전과 비교 <br>
 
 <form action="/diff">
-    <input type="hidden" id="one" name="one" value="one">
-    <input type="hidden" id="two" name="two" value="two">
+    <input type="hidden" id="openapi1" name="openapi1" value="one">
+    <input type="hidden" id="openapi2" name="openapi2" value="two">
     <select id="folders" class="selectFolder" th:onchange=showFiles([[${apiFolder}]])>
         <option>==api 폴더 선택==</option>
         <option th:each="folder : ${apiFolder}" th:value="${folder.value}" th:text="${folder.key}">FAST</option>
