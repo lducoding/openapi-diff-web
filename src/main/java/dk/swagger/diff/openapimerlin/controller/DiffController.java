@@ -3,18 +3,22 @@ package dk.swagger.diff.openapimerlin.controller;
 import org.openapitools.openapidiff.core.OpenApiCompare;
 import org.openapitools.openapidiff.core.model.ChangedOpenApi;
 import org.openapitools.openapidiff.core.output.HtmlRender;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.*;
 
 @Controller
 public class DiffController {
+
+    static String directory = "";
+
+    public DiffController(@Value("${main.directory}") String directory) {
+        this.directory = directory;
+    }
 
     @GetMapping("/diff")
     public String diff(Model model, String openapi1, String openapi2) {
@@ -45,7 +49,7 @@ public class DiffController {
 
     @GetMapping("/")
     public String home(Model model) {
-        String directory = "D:\\test\\";
+
         Map<String, String> apiFolder = new HashMap<>();
 
         File mainDir = new File(directory);
