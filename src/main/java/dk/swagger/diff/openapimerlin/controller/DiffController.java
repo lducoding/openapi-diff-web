@@ -6,18 +6,21 @@ import org.openapitools.openapidiff.core.output.HtmlRender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.*;
 
 @Controller
 public class DiffController {
 
     @GetMapping("/diff")
-    public String diff(Model model) {
-
-        String OPENAPI_DOC1 = "D:\\swaggerapi-history\\one.json";
-        String OPENAPI_DOC2 = "D:\\swaggerapi-history\\two.json";
+    public String diff(Model model, String one, String two) {
+//        String OPENAPI_DOC1 = directory + "\\" + folderList.get(0);
+        String OPENAPI_DOC1 = one;
+        String OPENAPI_DOC2 = two;
 
         ChangedOpenApi diff = OpenApiCompare.fromLocations(OPENAPI_DOC1, OPENAPI_DOC2);
 
@@ -27,6 +30,8 @@ public class DiffController {
 
         System.out.println(html);
         model.addAttribute("tt", html);
+
+        // html 파일로 추출 (return to html file)
 //        try {
 //            FileWriter fw = new FileWriter(
 //                    "D:\\openapi-merlin\\src\\main\\resources\\templates\\test.html");
@@ -37,6 +42,44 @@ public class DiffController {
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
+        return "diffResult";
+    }
+
+    @GetMapping("/")
+    public String home(Model model) {
+        String directory = "D:\\test\\";
+        Map<String, String> apiFolder = new HashMap<>();
+
+        File mainDir = new File(directory);
+        File[] folderDir = mainDir.listFiles();
+        List<String> folders = List.of(mainDir.list());
+        for (int i = 0; i < folderDir.length; i++) {
+            apiFolder.put(folders.get(i),folderDir[i].toString());
+        }
+        model.addAttribute("apiFolder", apiFolder);
+        System.out.println(apiFolder);
+
         return "home";
+    }
+
+    // @RequestParam HashMap<Object, Object> reqParam
+    @GetMapping("/showFiles")
+    public String showFiles(Model model, String folderName, String folderDir) {
+
+        folderDir += "\\" + "backup";
+
+        File backupFiles = new File(folderDir);
+        List<String> openapiFilesName = List.of(backupFiles.list());
+        File[] openapiFilesDirectory = backupFiles.listFiles();
+
+        Map<String, File> openapiFilesDir = new HashMap<>();
+        for (int i = 0; i < openapiFilesName.size(); i++) {
+            openapiFilesDir.put(openapiFilesName.get(i), openapiFilesDirectory[i]);
+        }
+
+        model.addAttribute("openapiFilesName", openapiFilesName);
+        model.addAttribute("openapiFiles", openapiFilesDir);
+
+        return "home::#files";
     }
 }

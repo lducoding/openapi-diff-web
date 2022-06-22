@@ -1,10 +1,55 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Hello</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="UTF-8">
+    <title>비교할 openapi 선택</title>
 </head>
 <body>
-<span th:utext="${tt}"></span>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+    function showFiles(apiFolder) {
+        // var reqParam = JSON.stringify(apiFolder);
+        var folderDir = $('#folders option:selected').val();
+        var folderName = $('#folders option:selected').text();
+        $.ajax({
+            url: "/showFiles",
+            data: {"folderName": folderName, "folderDir": folderDir},
+            type: "GET"
+        }).done(function (fragment) {
+            $("#files").replaceWith(fragment);
+        });
+    }
+    function setFileDir() {
+        var openapi1Dir = $('#opeapi1 option:selected').val();
+        $('#one').val(openapi1Dir);
+    }
+    function showSubmit() {
+        var openap21Dir = $('#opeapi2 option:selected').val();
+        $('#two').val(openap21Dir);
+        document.getElementsByClassName('submitBtn')[0].style.display = ''
+    }
+</script>
+openapi 이전버전과 비교 <br>
+
+<form action="/diff">
+    <input type="hidden" id="one" name="one" value="one">
+    <input type="hidden" id="two" name="two" value="two">
+    <select id="folders" class="selectFolder" th:onchange=showFiles([[${apiFolder}]])>
+        <option>==api 폴더 선택==</option>
+        <option th:each="folder : ${apiFolder}" th:value="${folder.value}" th:text="${folder.key}">FAST</option>
+    </select>
+    <div id="files">
+        <select id="opeapi1" class="selectFiles" onchange="setFileDir()">
+            <option>==비교할　파일　선택==</option>
+            <option th:each="files : ${openapiFiles}" th:value="${files.value}" th:text="${files.key}">FAST</option>
+        </select>
+        <select id="opeapi2" class="selectFiles" onchange=showSubmit()>
+            <option>==비교할　파일　선택==</option>
+            <option th:each="files : ${openapiFiles}" th:value="${files.value}" th:text="${files.key}">FAST</option>
+        </select>
+    </div>
+
+    <input class="submitBtn" type="submit" value="변경이력 확인" style="display: none">
+</form>
 </body>
 </html>
