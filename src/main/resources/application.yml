@@ -1,6 +1,6 @@
 main:
-#  directory: "D:\\test\\"
-  directory: "./openapi"
+#  directory: "D:\\test\\" #개발
+  directory: "./openapi"  #배포
 
 server:
   port: 8080

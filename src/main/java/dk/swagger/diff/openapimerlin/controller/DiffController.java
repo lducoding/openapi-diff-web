@@ -18,7 +18,6 @@ public class DiffController {
 
     public DiffController(@Value("${main.directory}") String directory) {
         this.directory = directory;
-        System.out.println("=======================================여기에요============"+directory+"&&"+ this.directory);
     }
 
     @GetMapping("/diff")
@@ -71,10 +70,17 @@ public class DiffController {
         folderDir += "/" + "backup";
 
         File backupFiles = new File(folderDir);
-        List<String> openapiFilesName = List.of(backupFiles.list());
-        File[] openapiFilesDirectory = backupFiles.listFiles();
 
-        Map<String, File> openapiFilesDir = new HashMap<>();
+        String[] fileList = backupFiles.list();
+        Arrays.sort(fileList, Collections.reverseOrder());
+        List<String> openapiFilesName = List.of(fileList);
+//        System.out.println("파일이름 소팅"+ openapiFilesName);
+
+        File[] openapiFilesDirectory = backupFiles.listFiles();
+        Arrays.sort(openapiFilesDirectory, Collections.reverseOrder());
+//        Arrays.stream(openapiFilesDirectory).forEach(dir -> System.out.println("파일경로 소팅" + dir));
+
+        Map<String, File> openapiFilesDir = new LinkedHashMap<>();
         for (int i = 0; i < openapiFilesName.size(); i++) {
             openapiFilesDir.put(openapiFilesName.get(i), openapiFilesDirectory[i]);
         }
