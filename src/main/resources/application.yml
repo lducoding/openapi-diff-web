@@ -1,2 +1,6 @@
 main:
-  directory: "D:\\test\\"
+#  directory: "D:\\test\\"
+  directory: "./openapi"
+
+server:
+  port: 8080

@@ -18,6 +18,7 @@ public class DiffController {
 
     public DiffController(@Value("${main.directory}") String directory) {
         this.directory = directory;
+        System.out.println("=======================================여기에요============"+directory+"&&"+ this.directory);
     }
 
     @GetMapping("/diff")
@@ -67,7 +68,7 @@ public class DiffController {
     @GetMapping("/showFiles")
     public String showFiles(Model model, String folderName, String folderDir) {
 
-        folderDir += "\\" + "backup";
+        folderDir += "/" + "backup";
 
         File backupFiles = new File(folderDir);
         List<String> openapiFilesName = List.of(backupFiles.list());

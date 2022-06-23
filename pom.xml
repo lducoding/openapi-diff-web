@@ -12,6 +12,7 @@
 	<artifactId>openapi-merlin</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>openapi-merlin</name>
+	<packaging>jar</packaging>
 	<description>openapi diff web</description>
 	<properties>
 		<java.version>11</java.version>
