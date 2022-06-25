@@ -51,7 +51,7 @@ public class DiffController {
     public String home(Model model) {
 
         Map<String, String> apiFolder = new HashMap<>();
-
+        System.out.println(directory+"========");
         File mainDir = new File(directory);
         File[] folderDir = mainDir.listFiles();
         List<String> folders = List.of(mainDir.list());
@@ -68,7 +68,7 @@ public class DiffController {
     public String showFiles(Model model, String folderName, String folderDir) {
 
         folderDir += "/" + "backup";
-
+        System.out.println(folderDir);
         File backupFiles = new File(folderDir);
 
         String[] fileList = backupFiles.list();
