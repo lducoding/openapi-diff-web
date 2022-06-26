@@ -5,7 +5,7 @@ openapi 스펙(3.0)을 web에서 편리하게 비교가 가능합니다
 [![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/openapitools/openapi-diff)](https://hub.docker.com/repository/docker/lducoding/openapi-diff-web)
 [![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/openapitools/openapi-diff)](https://hub.docker.com/repository/docker/lducoding/openapi-diff-web)
 
-[![Docker Image Version](https://img.shields.io/docker/v/openapitools/openapi-diff?sort=semver)](https://hub.docker.com/r/openapitools/openapi-diff/tags)
+[![Docker Image Version](https://img.shields.io/docker/v/lducoding/openapi-diff-web)](https://hub.docker.com/r/lducoding/openapi-diff-web/tags)
 
 # 실행환경(Requirements)
 
