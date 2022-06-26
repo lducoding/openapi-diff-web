@@ -11,7 +11,12 @@ openapi 스펙(3.0)을 web에서 편리하게 비교가 가능합니다
 
 * Java 11
 
-# Feature
+# 실행화면(Run Screen)
+<img src="https://user-images.githubusercontent.com/72716345/175814321-2e3bc5d4-6894-49cd-8ea6-bd0d16086a80.jpeg"  width="500" height="400"/>
+
+
+
+# 특징(Feature)
 
 * openapi 스펙 3.0을 지원합니다.
 * 웹에서 편리하게 openapi spec의 변경이력을 확인할 수 있습니다.
@@ -19,7 +24,7 @@ openapi 스펙(3.0)을 web에서 편리하게 비교가 가능합니다
 * 경로의 위치는 상관 없으나 openapi/folder/backup/2.json 의 구조로 만들어야 합니다.
 * 경로생성 시 backup폴더의 이름은 변경하면 안됩니다.
 
-# Run to Docker
+# 도커로 실행(Run to Docker)
 
 Available on [Docker Hub](https://hub.docker.com/repository/docker/lducoding/openapi-diff-web) as `lducoding/openapi-diff-web`.
 
@@ -27,7 +32,7 @@ Available on [Docker Hub](https://hub.docker.com/repository/docker/lducoding/ope
 docker run -v /Users/ldu/openapi:./openapi lducoding/openpapi-diff-web
 ```
 
-# Usage
+# 사용법(Usage)
 
 * 폴더 구조는 openapi(이름 변경가능)/(각종 api별 폴더가 존재)/backup(고정 변경불가!)/(openapi스펙파일들)
 * ex) openapi/login/backup/220625.json
