@@ -29,7 +29,7 @@ openapi 스펙(3.0)을 web에서 편리하게 비교가 가능합니다
 Available on [Docker Hub](https://hub.docker.com/repository/docker/lducoding/openapi-diff-web) as `lducoding/openapi-diff-web`.
 
 ```bash
-docker run -v /Users/ldu/openapi:./openapi lducoding/openpapi-diff-web
+docker run -v /Users/ldu/openapi:/openapi lducoding/openpapi-diff-web
 ```
 
 # 사용법(Usage)
