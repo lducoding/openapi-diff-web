@@ -1,6 +1,7 @@
 main:
 #  directory: "D:\\test\\" #개발
-  directory: "./openapi"  #배포
+#  directory: "./openapi"  #배포
+  directory: "/Users/ldu/openapi"
 
 server:
   port: 8080

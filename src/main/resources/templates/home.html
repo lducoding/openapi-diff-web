@@ -1,56 +1,91 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<link href="http://deepoove.com/swagger-diff/stylesheets/demo.css" rel="stylesheet" type="text/css" />
+<!doctype html>
+<html lang="en">
+<link rel="stylesheet" type="text/css" th:href="@{/css/signin.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
 <head>
-    <meta charset="UTF-8">
-    <title>비교할 openapi 선택</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.98.0">
+    <title>Signin Template · Bootstrap v5.2</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sign-in/">
+
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background-color: #009688;
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script>
+        function showFiles() {
+            var folderDir = $('#folders option:selected').val();
+            var folderName = $('#folders option:selected').text();
+            $.ajax({
+                url: "/showFiles",
+                data: {"folderName": folderName, "folderDir": folderDir},
+                type: "GET"
+            }).done(function (fragment) {
+                $("#files").replaceWith(fragment);
+            });
+        }
+
+        function setFileDir() {
+            var openapi1Dir = $('#opeapi1 option:selected').val();
+            $('#openapi1').val(openapi1Dir);
+        }
+
+        function showSubmit() {
+            var openap21Dir = $('#opeapi2 option:selected').val();
+            $('#openapi2').val(openap21Dir);
+            document.getElementsByClassName('submitBtn')[0].style.display = ''
+        }
+    </script>
+
 </head>
-<body>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script>
-    function showFiles(apiFolder) {
-        // var reqParam = JSON.stringify(apiFolder);
-        var folderDir = $('#folders option:selected').val();
-        var folderName = $('#folders option:selected').text();
-        $.ajax({
-            url: "/showFiles",
-            data: {"folderName": folderName, "folderDir": folderDir},
-            type: "GET"
-        }).done(function (fragment) {
-            $("#files").replaceWith(fragment);
-        });
-    }
-    function setFileDir() {
-        var openapi1Dir = $('#opeapi1 option:selected').val();
-        $('#openapi1').val(openapi1Dir);
-    }
-    function showSubmit() {
-        var openap21Dir = $('#opeapi2 option:selected').val();
-        $('#openapi2').val(openap21Dir);
-        document.getElementsByClassName('submitBtn')[0].style.display = ''
-    }
-</script>
-openapi 이전버전과 비교 <br>
+<body class="text-center">
 
-<form action="/diff">
-    <input type="hidden" id="openapi1" name="openapi1" value="one">
-    <input type="hidden" id="openapi2" name="openapi2" value="two">
-    <select id="folders" class="selectFolder" th:onchange=showFiles([[${apiFolder}]])>
-        <option>==api 폴더 선택==</option>
-        <option th:each="folder : ${apiFolder}" th:value="${folder.value}" th:text="${folder.key}">FAST</option>
-    </select>
-    <div id="files">
-        <select id="opeapi1" class="selectFiles" onchange="setFileDir()">
-            <option>==비교할　파일　선택==</option>
-            <option th:each="files : ${openapiFiles}" th:value="${files.value}" th:text="${files.key}">FAST</option>
-        </select>
-        <select id="opeapi2" class="selectFiles" onchange=showSubmit()>
-            <option>==비교할　파일　선택==</option>
-            <option th:each="files : ${openapiFiles}" th:value="${files.value}" th:text="${files.key}">FAST</option>
-        </select>
+<main class="form-signin w-100 m-auto">
+    <div>
+        <form action="/diff">
+<!--            <img class="mb-4" src="" width="72" height="57">-->
+            <h1 class="h3 mb-3 fw-normal">openapi-diff-web</h1>
+            <input type="hidden" id="openapi1" name="openapi1" value="one">
+            <input type="hidden" id="openapi2" name="openapi2" value="two">
+
+            <div class="form-floating">
+                <div>
+                <select id="folders" class="selectFolder form-control" onchange="showFiles()">
+                    <option>api 폴더 선택</option>
+                    <option th:each="folder : ${apiFolder}" th:value="${folder.value}" th:text="${folder.key}">FAST
+                    </option>
+                </select>
+                </div>
+            </div>
+            <div class="form-floating">
+                <div id="files">
+                    <select id="opeapi1" class="selectFiles form-control" onchange="setFileDir()">
+                        <option>비교할　파일　선택</option>
+                        <option th:each="files : ${openapiFiles}" th:value="${files.value}" th:text="${files.key}">
+                            FAST
+                        </option>
+                    </select>
+                    <select id="opeapi2" class="selectFiles form-control" onchange=showSubmit()>
+                        <option>비교할　파일　선택</option>
+                        <option th:each="files : ${openapiFiles}" th:value="${files.value}" th:text="${files.key}">
+                            FAST
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <input class="submitBtn w-100 btn btn-lg btn-primary" type="submit" value="변경이력 확인" style="display: none">
+        </form>
     </div>
-
-    <input class="submitBtn" type="submit" value="변경이력 확인" style="display: none">
-</form>
+</main>
 </body>
 </html>
