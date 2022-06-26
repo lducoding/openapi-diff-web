@@ -6,10 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.98.0">
-    <title>Signin Template · Bootstrap v5.2</title>
-
+    <title>openapi-diff-web</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sign-in/">
 
     <style>
@@ -62,8 +59,7 @@
                 <div>
                 <select id="folders" class="selectFolder form-control" onchange="showFiles()">
                     <option>api 폴더 선택</option>
-                    <option th:each="folder : ${apiFolder}" th:value="${folder.value}" th:text="${folder.key}">FAST
-                    </option>
+                    <option th:each="folder : ${apiFolder}" th:value="${folder.value}" th:text="${folder.key}">folder</option>
                 </select>
                 </div>
             </div>
@@ -71,19 +67,15 @@
                 <div id="files">
                     <select id="opeapi1" class="selectFiles form-control" onchange="setFileDir()">
                         <option>비교할　파일　선택</option>
-                        <option th:each="files : ${openapiFiles}" th:value="${files.value}" th:text="${files.key}">
-                            FAST
-                        </option>
+                        <option th:each="files : ${openapiFiles}" th:value="${files.value}" th:text="${files.key}">file1</option>
                     </select>
                     <select id="opeapi2" class="selectFiles form-control" onchange=showSubmit()>
                         <option>비교할　파일　선택</option>
-                        <option th:each="files : ${openapiFiles}" th:value="${files.value}" th:text="${files.key}">
-                            FAST
-                        </option>
+                        <option th:each="files : ${openapiFiles}" th:value="${files.value}" th:text="${files.key}">file2</option>
                     </select>
                 </div>
             </div>
-            <input class="submitBtn w-100 btn btn-lg btn-primary" type="submit" value="변경이력 확인" style="display: none">
+            <input class="submitBtn w-100 btn btn-lg btn-primary" type="submit" value="Check History" style="display: none">
         </form>
     </div>
 </main>
