@@ -55,7 +55,7 @@ docker run -v /Users/ldu/openapi:/openapi lducoding/openpapi-diff-web
 
 openapi-diff-web is released under the Apache License 2.0.
 
-## Thanks
+## Thanks to
 
 * [OpenApiTools](https://github.com/OpenAPITools) for this project [openapi-diff](https://github.com/OpenAPITools/openapi-diff) 
   which was a source of inspiration for this tool
